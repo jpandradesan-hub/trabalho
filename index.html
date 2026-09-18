@@ -1,225 +1,107 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#10213b">
-  <title>3ª Lei de Newton — Ação e Reação</title>
-  <style>
-    :root{
-      --bg:#f4f7fb; --card:#fff; --ink:#10213b; --muted:#61708a;
-      --line:#dbe3ee; --blue:#2463eb; --blue2:#dce8ff;
-      --a:#147d92; --b:#d66b31; --ok:#16794b; --bad:#b33b32;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:var(--bg); color:var(--ink); line-height:1.5;
-    }
-    .wrap{width:min(760px,100%); margin:auto; padding:18px 14px 44px}
-    header{text-align:center; padding:14px 4px 8px}
-    .eyebrow{font-size:.78rem; font-weight:800; letter-spacing:.09em; color:var(--blue)}
-    h1{font-size:clamp(1.8rem,8vw,3rem); line-height:1.05; margin:.3rem 0 .6rem}
-    header p{color:var(--muted); margin:0 auto; max-width:620px}
-    .card{
-      background:var(--card); border:1px solid var(--line); border-radius:20px;
-      padding:18px; margin-top:14px; box-shadow:0 8px 28px rgba(16,33,59,.06);
-    }
-    h2{font-size:1.12rem; margin:0 0 8px}
-    .formula{
-      background:#eef3f9; border-radius:14px; padding:12px; text-align:center;
-      font-size:1.18rem; font-weight:800; margin-top:12px;
-    }
-    .topline{display:flex; align-items:end; justify-content:space-between; gap:12px}
-    .value{text-align:right; font-size:1.35rem; font-weight:900}
-    .small{font-size:.82rem; color:var(--muted)}
-    .scene{margin:14px 0; background:#f8fafc; border:1px solid var(--line); border-radius:16px; padding:8px}
-    svg{display:block; width:100%; height:auto}
-    label{display:block; font-weight:700; margin-bottom:5px}
-    input[type=range]{width:100%; min-height:44px; accent-color:var(--blue)}
-    .scale{display:flex; justify-content:space-between; color:var(--muted); font-size:.75rem}
-    button{
-      appearance:none; border:0; border-radius:14px; min-height:48px; padding:11px 16px;
-      font:inherit; font-weight:800; cursor:pointer; touch-action:manipulation;
-    }
-    button:focus-visible,input:focus-visible{outline:3px solid rgba(36,99,235,.35); outline-offset:2px}
-    .primary{width:100%; margin-top:12px; background:var(--blue); color:white}
-    .status{text-align:center; min-height:24px; margin:10px 0 0; font-weight:700}
-    .pair{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px}
-    .mini{border:1px solid var(--line); border-radius:14px; padding:12px}
-    .mini p{margin:4px 0 0; color:var(--muted); font-size:.9rem}
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
-    .chip{background:#eef3f9; border-radius:999px; padding:7px 10px; font-size:.84rem; font-weight:700}
-    .quiz{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px}
-    .quiz button{background:#fff; color:var(--ink); border:1px solid var(--line)}
-    .quiz button.selected{border-color:var(--blue); background:var(--blue2)}
-    #quizResult{min-height:24px; font-weight:700}
-    footer{text-align:center; color:var(--muted); font-size:.78rem; padding-top:22px}
-    @media(max-width:430px){
-      .wrap{padding-left:11px;padding-right:11px}
-      .card{padding:15px;border-radius:17px}
-      .pair{grid-template-columns:1fr}
-      .quiz{gap:6px}
-      .quiz button{padding:9px 5px}
-    }
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10213b">
+<title>3ª Lei de Newton — Ação e Reação</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#10213b;--muted:#61708a;--line:#dbe3ee;--blue:#2463eb;--soft:#eef3f9;--a:#147d92;--b:#d66b31;--ok:#16794b;--warn:#a34b12}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+main{width:min(760px,100%);margin:auto;padding:18px 12px 44px}header{text-align:center;padding:12px 4px}
+.tag{font-size:.78rem;font-weight:900;letter-spacing:.1em;color:var(--blue)}h1{font-size:clamp(1.9rem,8vw,3rem);line-height:1.05;margin:.3rem 0 .6rem}header p{margin:auto;max-width:620px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:17px;margin-top:14px;box-shadow:0 8px 25px #10213b0d}
+h2{font-size:1.12rem;margin:0 0 8px}.formula{background:var(--soft);border-radius:14px;padding:12px;text-align:center;font-weight:900;font-size:1.15rem;margin-top:12px}
+.scene{margin:14px 0;background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:7px}svg{width:100%;height:auto;display:block}
+.control{margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:15px}.control.a{border-left:5px solid var(--a)}.control.b{border-left:5px solid var(--b)}
+.controlHead{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:800}.number{font-size:1.15rem;white-space:nowrap}
+input[type=range]{width:100%;min-height:44px;accent-color:var(--blue)}.scale{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+button{border:0;border-radius:14px;min-height:48px;padding:11px 16px;font:inherit;font-weight:850;cursor:pointer}.primary{width:100%;margin-top:14px;background:var(--blue);color:white}
+button:focus-visible,input:focus-visible{outline:3px solid #2463eb55;outline-offset:2px}.status{padding:12px;margin:12px 0 0;border-radius:14px;background:var(--soft);font-weight:700;text-align:center}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.mini{border:1px solid var(--line);border-radius:14px;padding:12px}.mini p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+.note{font-size:.9rem;color:var(--muted);margin-top:10px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.chip{background:var(--soft);border-radius:999px;padding:7px 10px;font-size:.83rem;font-weight:700}
+.quiz{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.quiz button{background:white;border:1px solid var(--line);color:var(--ink)}#quizResult{font-weight:700;min-height:24px}
+footer{text-align:center;color:var(--muted);font-size:.78rem;padding-top:22px}
+@media(max-width:430px){.card{padding:14px;border-radius:17px}.pair{grid-template-columns:1fr}.controlHead{align-items:flex-start}}
+</style>
 </head>
 <body>
-<main class="wrap">
-  <header>
-    <div class="eyebrow">FÍSICA INTERATIVA</div>
-    <h1>3ª Lei de Newton</h1>
-    <p>Explore a ideia de <strong>ação e reação</strong> alterando a força e observando o que acontece.</p>
-  </header>
+<main>
+<header>
+<div class="tag">FÍSICA INTERATIVA</div>
+<h1>3ª Lei de Newton</h1>
+<p>Explore ação e reação controlando separadamente o que cada patinador tenta fazer.</p>
+</header>
 
-  <section class="card">
-    <h2>O que diz a terceira lei?</h2>
-    <p>Quando um corpo exerce uma força sobre outro, o segundo exerce sobre o primeiro uma força de <strong>mesma intensidade e direção</strong>, mas em <strong>sentido oposto</strong>.</p>
-    <div class="formula">F<sub>A→B</sub> = −F<sub>B→A</sub></div>
-  </section>
+<section class="card">
+<h2>O que diz a lei?</h2>
+<p>Quando um corpo exerce uma força sobre outro, o segundo exerce sobre o primeiro uma força de <strong>mesma intensidade e direção</strong>, mas em <strong>sentido oposto</strong>.</p>
+<div class="formula">F<sub>A→B</sub> = −F<sub>B→A</sub></div>
+</section>
 
-  <section class="card">
-    <div class="topline">
-      <div>
-        <h2>Experimente</h2>
-        <div class="small">Dois patinadores empurram um ao outro.</div>
-      </div>
-      <div class="value"><span id="forceValue">50</span> N<div class="small">força aplicada</div></div>
-    </div>
+<section class="card">
+<h2>Simulação</h2>
+<p class="note">Altere as duas barras. Se escolher valores diferentes, a simulação explicará por que eles não podem formar, sozinhos, um único par ação–reação.</p>
 
-    <div class="scene">
-      <svg viewBox="0 0 600 270" role="img" aria-label="Dois patinadores com forças iguais em sentidos opostos">
-        <line x1="30" y1="220" x2="570" y2="220" stroke="#dbe3ee" stroke-width="5" stroke-linecap="round"/>
-        <g id="leftSkater">
-          <circle cx="220" cy="110" r="23" fill="#147d92"/>
-          <line x1="220" y1="135" x2="220" y2="183" stroke="#147d92" stroke-width="13" stroke-linecap="round"/>
-          <line x1="220" y1="150" x2="275" y2="158" stroke="#147d92" stroke-width="11" stroke-linecap="round"/>
-          <line x1="220" y1="181" x2="198" y2="210" stroke="#147d92" stroke-width="10" stroke-linecap="round"/>
-          <line x1="220" y1="181" x2="242" y2="210" stroke="#147d92" stroke-width="10" stroke-linecap="round"/>
-          <circle cx="196" cy="216" r="7" fill="#10213b"/><circle cx="244" cy="216" r="7" fill="#10213b"/>
-        </g>
-        <g id="rightSkater">
-          <circle cx="380" cy="110" r="23" fill="#d66b31"/>
-          <line x1="380" y1="135" x2="380" y2="183" stroke="#d66b31" stroke-width="13" stroke-linecap="round"/>
-          <line x1="380" y1="150" x2="325" y2="158" stroke="#d66b31" stroke-width="11" stroke-linecap="round"/>
-          <line x1="380" y1="181" x2="358" y2="210" stroke="#d66b31" stroke-width="10" stroke-linecap="round"/>
-          <line x1="380" y1="181" x2="402" y2="210" stroke="#d66b31" stroke-width="10" stroke-linecap="round"/>
-          <circle cx="356" cy="216" r="7" fill="#10213b"/><circle cx="404" cy="216" r="7" fill="#10213b"/>
-        </g>
-        <g>
-          <line id="leftLine" x1="205" y1="58" x2="135" y2="58" stroke="#147d92" stroke-width="8" stroke-linecap="round"/>
-          <polygon id="leftHead" points="135,58 153,46 153,70" fill="#147d92"/>
-          <text id="leftText" x="170" y="38" text-anchor="middle" fill="#10213b" font-size="17" font-weight="800">50 N</text>
-        </g>
-        <g>
-          <line id="rightLine" x1="395" y1="58" x2="465" y2="58" stroke="#d66b31" stroke-width="8" stroke-linecap="round"/>
-          <polygon id="rightHead" points="465,58 447,46 447,70" fill="#d66b31"/>
-          <text id="rightText" x="430" y="38" text-anchor="middle" fill="#10213b" font-size="17" font-weight="800">50 N</text>
-        </g>
-        <text x="220" y="252" text-anchor="middle" fill="#61708a" font-size="15">Patinador A</text>
-        <text x="380" y="252" text-anchor="middle" fill="#61708a" font-size="15">Patinador B</text>
-      </svg>
-    </div>
+<div class="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="Dois patinadores e setas indicando forças opostas">
+<line x1="30" y1="220" x2="570" y2="220" stroke="#dbe3ee" stroke-width="5" stroke-linecap="round"/>
+<g id="A"><circle cx="220" cy="110" r="23" fill="#147d92"/><line x1="220" y1="135" x2="220" y2="183" stroke="#147d92" stroke-width="13" stroke-linecap="round"/><line x1="220" y1="150" x2="275" y2="158" stroke="#147d92" stroke-width="11" stroke-linecap="round"/><line x1="220" y1="181" x2="198" y2="210" stroke="#147d92" stroke-width="10" stroke-linecap="round"/><line x1="220" y1="181" x2="242" y2="210" stroke="#147d92" stroke-width="10" stroke-linecap="round"/><circle cx="196" cy="216" r="7" fill="#10213b"/><circle cx="244" cy="216" r="7" fill="#10213b"/></g>
+<g id="B"><circle cx="380" cy="110" r="23" fill="#d66b31"/><line x1="380" y1="135" x2="380" y2="183" stroke="#d66b31" stroke-width="13" stroke-linecap="round"/><line x1="380" y1="150" x2="325" y2="158" stroke="#d66b31" stroke-width="11" stroke-linecap="round"/><line x1="380" y1="181" x2="358" y2="210" stroke="#d66b31" stroke-width="10" stroke-linecap="round"/><line x1="380" y1="181" x2="402" y2="210" stroke="#d66b31" stroke-width="10" stroke-linecap="round"/><circle cx="356" cy="216" r="7" fill="#10213b"/><circle cx="404" cy="216" r="7" fill="#10213b"/></g>
+<line id="arrA" x1="395" y1="58" x2="465" y2="58" stroke="#147d92" stroke-width="8" stroke-linecap="round"/><polygon id="headA" points="465,58 447,46 447,70" fill="#147d92"/><text id="txtA" x="430" y="38" text-anchor="middle" fill="#10213b" font-size="17" font-weight="800">50 N</text>
+<line id="arrB" x1="205" y1="58" x2="135" y2="58" stroke="#d66b31" stroke-width="8" stroke-linecap="round"/><polygon id="headB" points="135,58 153,46 153,70" fill="#d66b31"/><text id="txtB" x="170" y="38" text-anchor="middle" fill="#10213b" font-size="17" font-weight="800">50 N</text>
+<text x="220" y="252" text-anchor="middle" fill="#61708a" font-size="15">Patinador A</text><text x="380" y="252" text-anchor="middle" fill="#61708a" font-size="15">Patinador B</text>
+</svg>
+</div>
 
-    <label for="force">Intensidade da força</label>
-    <input id="force" type="range" min="10" max="100" step="10" value="50">
-    <div class="scale"><span>10 N</span><span>100 N</span></div>
-    <button class="primary" id="push" type="button">Empurrar</button>
-    <p class="status" id="status" aria-live="polite">Toque em “Empurrar” para observar o par de forças.</p>
+<div class="control a"><div class="controlHead"><label for="forceA">Patinador A</label><span class="number"><span id="valA">50</span> N</span></div><input id="forceA" type="range" min="10" max="100" step="10" value="50"><div class="scale"><span>10 N</span><span>100 N</span></div></div>
+<div class="control b"><div class="controlHead"><label for="forceB">Patinador B</label><span class="number"><span id="valB">50</span> N</span></div><input id="forceB" type="range" min="10" max="100" step="10" value="50"><div class="scale"><span>10 N</span><span>100 N</span></div></div>
 
-    <div class="pair">
-      <div class="mini"><strong>Ação</strong><p id="action">A empurra B com 50 N.</p></div>
-      <div class="mini"><strong>Reação</strong><p id="reaction">B empurra A com 50 N no sentido oposto.</p></div>
-    </div>
-  </section>
+<button id="push" class="primary" type="button">Testar as forças</button>
+<div id="status" class="status" aria-live="polite">A = 50 N e B = 50 N: valores compatíveis com um par ação–reação.</div>
 
-  <section class="card">
-    <h2>Por que elas não se anulam?</h2>
-    <p>Porque as duas forças atuam em <strong>corpos diferentes</strong>: uma força atua sobre A e a outra sobre B.</p>
-    <div class="chips">
-      <span class="chip">✓ Mesma intensidade</span><span class="chip">✓ Mesma direção</span>
-      <span class="chip">✓ Sentidos opostos</span><span class="chip">✓ Corpos diferentes</span>
-    </div>
-  </section>
+<div class="pair"><div class="mini"><strong>Força indicada por A</strong><p id="descA">A tenta empurrar B com 50 N.</p></div><div class="mini"><strong>Força indicada por B</strong><p id="descB">B tenta empurrar A com 50 N.</p></div></div>
+</section>
 
-  <section class="card">
-    <h2>Teste rápido</h2>
-    <p>Se A empurra B com <strong>80 N</strong>, com qual intensidade B empurra A?</p>
-    <div class="quiz">
-      <button type="button" data-answer="40">40 N</button>
-      <button type="button" data-answer="80">80 N</button>
-      <button type="button" data-answer="160">160 N</button>
-    </div>
-    <p id="quizResult" aria-live="polite">Escolha uma resposta.</p>
-  </section>
+<section class="card">
+<h2>O detalhe essencial</h2>
+<p>As duas barras são independentes para fins de comparação. Porém, se estivermos falando <strong>do mesmo par de interação</strong>, a 3ª Lei exige forças iguais e opostas. Portanto, 80 N de A e 40 N de B não podem ser as duas forças de um único par ação–reação.</p>
+<div class="chips"><span class="chip">✓ Mesma intensidade</span><span class="chip">✓ Mesma direção</span><span class="chip">✓ Sentidos opostos</span><span class="chip">✓ Corpos diferentes</span></div>
+</section>
 
-  <footer>Experimento educativo sobre a Terceira Lei de Newton.</footer>
+<section class="card">
+<h2>Teste rápido</h2>
+<p>Se A exerce sobre B uma força de <strong>80 N</strong>, qual é a intensidade da força que B exerce sobre A nesse par?</p>
+<div class="quiz"><button data-v="40">40 N</button><button data-v="80">80 N</button><button data-v="160">160 N</button></div>
+<p id="quizResult" aria-live="polite">Escolha uma resposta.</p>
+</section>
+<footer>Experimento educativo sobre a Terceira Lei de Newton.</footer>
 </main>
 
 <script>
-(() => {
-  const force = document.getElementById('force');
-  const value = document.getElementById('forceValue');
-  const leftLine = document.getElementById('leftLine');
-  const rightLine = document.getElementById('rightLine');
-  const leftHead = document.getElementById('leftHead');
-  const rightHead = document.getElementById('rightHead');
-  const leftText = document.getElementById('leftText');
-  const rightText = document.getElementById('rightText');
-  const action = document.getElementById('action');
-  const reaction = document.getElementById('reaction');
-  const status = document.getElementById('status');
-  const left = document.getElementById('leftSkater');
-  const right = document.getElementById('rightSkater');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function update(){
-    const n = Math.max(10, Math.min(100, Number(force.value) || 50));
-    const len = 35 + n * .7;
-    const lx = 205 - len, rx = 395 + len;
-    value.textContent = n;
-    leftLine.setAttribute('x2', lx);
-    leftHead.setAttribute('points', `${lx},58 ${lx+18},46 ${lx+18},70`);
-    rightLine.setAttribute('x2', rx);
-    rightHead.setAttribute('points', `${rx},58 ${rx-18},46 ${rx-18},70`);
-    leftText.setAttribute('x', (205 + lx) / 2);
-    rightText.setAttribute('x', (395 + rx) / 2);
-    leftText.textContent = n + ' N';
-    rightText.textContent = n + ' N';
-    action.textContent = `A empurra B com ${n} N.`;
-    reaction.textContent = `B empurra A com ${n} N no sentido oposto.`;
-  }
-  force.addEventListener('input', update);
-
-  document.getElementById('push').addEventListener('click', () => {
-    const n = Number(force.value);
-    status.textContent = `Ação: ${n} N →  |  ← ${n} N: reação. Mesma intensidade, sentidos opostos.`;
-    if(!reduced && left.animate){
-      left.animate([{transform:'translateX(0)'},{transform:'translateX(-18px)'},{transform:'translateX(0)'}],
-        {duration:650,easing:'ease-out'});
-      right.animate([{transform:'translateX(0)'},{transform:'translateX(18px)'},{transform:'translateX(0)'}],
-        {duration:650,easing:'ease-out'});
-    }
-  });
-
-  document.querySelectorAll('.quiz button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.quiz button').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const result = document.getElementById('quizResult');
-      if(btn.dataset.answer === '80'){
-        result.textContent = '✓ Correto! A reação tem 80 N e sentido oposto.';
-        result.style.color = '#16794b';
-      } else {
-        result.textContent = 'Tente novamente: a ação e a reação têm a mesma intensidade.';
-        result.style.color = '#b33b32';
-      }
-    });
-  });
-  update();
+(()=>{
+const fa=document.querySelector('#forceA'),fb=document.querySelector('#forceB'),va=document.querySelector('#valA'),vb=document.querySelector('#valB');
+const arrA=document.querySelector('#arrA'),arrB=document.querySelector('#arrB'),headA=document.querySelector('#headA'),headB=document.querySelector('#headB'),txtA=document.querySelector('#txtA'),txtB=document.querySelector('#txtB');
+const status=document.querySelector('#status'),descA=document.querySelector('#descA'),descB=document.querySelector('#descB'),A=document.querySelector('#A'),B=document.querySelector('#B');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function arrows(a,b){
+ let ra=395+35+a*.7;arrA.setAttribute('x2',ra);headA.setAttribute('points',`${ra},58 ${ra-18},46 ${ra-18},70`);txtA.setAttribute('x',(395+ra)/2);txtA.textContent=a+' N';
+ let lb=205-35-b*.7;arrB.setAttribute('x2',lb);headB.setAttribute('points',`${lb},58 ${lb+18},46 ${lb+18},70`);txtB.setAttribute('x',(205+lb)/2);txtB.textContent=b+' N';
+}
+function update(){
+ const a=+fa.value,b=+fb.value;va.textContent=a;vb.textContent=b;arrows(a,b);descA.textContent=`A tenta empurrar B com ${a} N.`;descB.textContent=`B tenta empurrar A com ${b} N.`;
+ status.textContent=a===b?`A = ${a} N e B = ${b} N: valores compatíveis com um par ação–reação.`:`A = ${a} N e B = ${b} N. Esses valores não podem ser as duas forças de um único par ação–reação.`;
+ status.style.color=a===b?'#16794b':'#a34b12';
+}
+fa.addEventListener('input',update);fb.addEventListener('input',update);
+document.querySelector('#push').addEventListener('click',()=>{
+ const a=+fa.value,b=+fb.value;
+ status.textContent=a===b?`Correto: ${a} N em cada corpo, com sentidos opostos.`:`Pela 3ª Lei, um mesmo par ação–reação precisa ter a mesma intensidade. ${a} N e ${b} N representam valores incompatíveis para esse único par.`;
+ status.style.color=a===b?'#16794b':'#a34b12';
+ if(!reduced&&A.animate){const d=8+Math.min(a,b)*.12;A.animate([{transform:'translateX(0)'},{transform:`translateX(-${d}px)`},{transform:'translateX(0)'}],{duration:650});B.animate([{transform:'translateX(0)'},{transform:`translateX(${d}px)`},{transform:'translateX(0)'}],{duration:650});}
+});
+document.querySelectorAll('.quiz button').forEach(x=>x.addEventListener('click',()=>{const r=document.querySelector('#quizResult');if(x.dataset.v==='80'){r.textContent='✓ Correto! B exerce 80 N sobre A, em sentido oposto.';r.style.color='#16794b'}else{r.textContent='Tente novamente: as duas forças do par têm a mesma intensidade.';r.style.color='#b33b32'}}));
+update();
 })();
 </script>
-</body>
-</html>
+</body></html>
